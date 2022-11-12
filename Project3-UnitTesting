@@ -1,0 +1,61 @@
+import unittest
+import datetime
+
+class TestMethods(unittest.TestCase):
+    def testSymbol(symbol):
+        if len(symbol) > 7 or symbol != symbol.upper():
+            print("The Symbol needs to be upper case and less than 8 characters long")
+            return False
+        else:
+            print("The Symbol passes all parameters")
+            return True
+            
+    def testChart(chartType):
+        if chartType != isinstance(chartType, int) or chartType < 1 or chartType > 2:
+            print("The Chart Type needs to be a single number of either 1 or 2")
+            return False
+        else:
+            print("The Chart Type passes all parameters")
+            return True
+    
+    def testTimeSeries(timeSeries):
+        if timeSeries != isinstance(timeSeries, int) or timeSeries < 1 or timeSeries > 4:
+            print("The Time Series needs to be a single number of either 1, 2, 3, or 4")
+            return False
+        else:
+            print("The Time Series passes all parameters")
+            return True
+            
+    def testStartDate(startDate):
+        try:
+            checkStartDate = datetime.datetime.strptime(startDate, '%Y-%m-%d')
+        except ValueError:
+            print("The Start Date needs to be in a YYYY-MM-DD format")
+        else:
+            print("The Start Date passes all parameters")
+            
+    def testEndDate(endDate):
+        try:
+            checkEndDate = datetime.datetime.strptime(endDate, '%Y-%m-%d')
+        except ValueError:
+            print("The End Date needs to be in a YYYY-MM-DD format")
+        else:
+            print("The End Date passes all parameters")
+
+    testSymbol('IBM') #pass
+    testSymbol('ibm') #fail
+    testSymbol('WIUIUGWFIUEFBIUWFE') #fail
+    
+    testChart(1) #pass
+    testChart(5) #fail
+    testChart("a") #fail
+    
+    testTimeSeries(1) #pass
+    testTimeSeries(7) #fail
+    testTimeSeries("a") #fail
+    
+    testStartDate("2011-12-15") #pass
+    testStartDate("26-10-2040") #fail
+    
+    testEndDate("2022-12-15") #pass
+    testEndDate("26-10-2040") #fail
